@@ -42,6 +42,26 @@ public class Basamak3 : MonoBehaviour
 
     }
 
+    //Üçgenlerin yeni pozisyonu 
+    public List<CreateTriangle> newTrianglesPosition(List<CreateTriangle> triangles)
+    {
+
+        for (int i = 0; i < triangles.Count; i++)
+        {
+            var triangle = triangles[i];
+            //1.noktanın x i değişmemesi için 
+            var vectorx = triangle.Vector1.x;
+
+
+            triangle.Vector1 = new Vector3(i, 0, 0);
+            triangle.Vector2 = new Vector3(i + 1, 0, 0);
+            //Üçgenin yeni pozisyonunda 3.noktanın x'i sıralamasına göre kaydırıldı.Y 'si değişmedi.
+            triangle.Vector3 = new Vector3(i + (triangle.Vector3.x - vectorx), triangle.Vector3.y, 0);
+            triangles[i] = triangle;
+        }
+        return triangles;
+    }
+
     public CreateTriangle RandomTriangle(int basePoint)
     {
         CreateTriangle vertices = new CreateTriangle();
@@ -75,23 +95,5 @@ public class Basamak3 : MonoBehaviour
         public float MaxAngle;
     }
 
-    //Üçgenlerin yeni pozisyonu 
-    public List<CreateTriangle> newTrianglesPosition(List<CreateTriangle> triangles)
-    {
-
-        for (int i = 0; i < triangles.Count; i++)
-        {
-            var triangle = triangles[i];
-            //1.noktanın x i değişmemesi için 
-            var vectorx = triangle.Vector1.x;
-
-
-            triangle.Vector1 = new Vector3(i, 0, 0);
-            triangle.Vector2 = new Vector3(i + 1, 0, 0);
-            //Üçgenin yeni pozisyonunda 3.noktanın x'i sıralamasına göre kaydırıldı.Y 'si değişmedi.
-            triangle.Vector3 = new Vector3(i + (triangle.Vector3.x - vectorx), triangle.Vector3.y, 0);
-            triangles[i] = triangle;
-        }
-        return triangles;
-    }
+   
 }
